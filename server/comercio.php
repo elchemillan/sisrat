@@ -50,7 +50,7 @@ class comercios{
             <div class="container-fluid opciones">
                 <div class="row">
                     <div class="col">
-                        <button onclick="btnRegForm()" class="btn btn-primary">APERTURAS</button>
+                        <button onclick="btnRegForm()" class="btn btn-primary">COMERCIOS</button>
                     </div>
                     <div class="col">
                         <button class="btn btn-primary">LISTAR</button>
@@ -348,7 +348,10 @@ class comercios{
         <div class="container-fluid opciones">
             <div class="row">
                 <div class="col">
-                    <button onclick="btnRegContrib()" class="btn btn-primary">CONTRIBUYENTE</button>
+                    <button onclick="btnRegContrib()" class="btn btn-primary">APERTURAS</button>
+                </div>
+                <div class="col">
+                    <button onclick="btnMostCotz()" class="btn btn-primary">COTIZACION</button>
                 </div>
                 <div class="col">
                     <button onclick="btnImpriApertu()" class="btn btn-primary" >IMPRIMIR</button>
@@ -659,7 +662,7 @@ class comercios{
         $resSubGrup = $link->query($subGrupCod);
         $subGrupRes = $resSubGrup->fetch_array();
 
-        $comerSQL = "INSERT INTO comercio(nombre,fk_propietario,fk_sector,fk_datComer,tipo,fk_recaudos,fk_grupo,noExpe)value('".$this->nomRaz."',".$fk_prop.",".$this->sectorContrib.",".$fk_darComer.",'".$this->tipEsta."',".$fk_recaudos.",".$this->grupNom.",".$this->sectorContrib."".$codGrupRes["codigo"]."".$subGrupRes["codigo"]."".$this->noExpedien.")";
+        $comerSQL = "INSERT INTO comercio(nombre,fk_propietario,fk_sector,fk_datComer,tipo,fk_recaudos,fk_actEcon,noExpe)value('".$this->nomRaz."',".$fk_prop.",".$this->sectorContrib.",".$fk_darComer.",'".$this->tipPropInmue."',".$fk_recaudos.",".$this->actEconAper.",".$this->sectorContrib."".$codGrupRes["codigo"]."".$subGrupRes["codigo"]."".$this->noExpedien.")";
         $link->query($comerSQL);
 
         echo'
@@ -681,6 +684,104 @@ class comercios{
                 <option value="'.$actEconRes["id"].'">'.$actEconRes["nombre"].'</option>
             ';
         }
+    }
+    function mostCotz(){
+        echo'
+        <div class="container-fluid espacReduc2">
+            <div class="row">
+                <div class="col titSect">
+                    <h3>DATOS PARA GENERAR PLANILLA<h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col campRec">
+                    <b>Min. Tributaria</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" id="minTrib" class="campos tamCamp"/>
+                </div>
+                <div class="col campRec">
+                    <b>Aforo</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" id="aforo" class="campos tamCamp"/>
+                </div>
+                <div class="col campRec">
+                    <b>Petro en Bs.</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" id="petroBs" class="campos tamCamp"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col campRec">
+                    <b>Act. Económica </b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" id="montActEcon" class="campos tamCamp">
+                </div>
+                <div class="col campRec">
+                    <b>Cerficado Bomberil</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" id="montCertBom" class="campos tamCamp">
+                </div>
+                <div class="col campRec">
+                    <b>Solvencia</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" id="montSolv" class="campos tamCamp">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col campRec">
+                    <b>Publicidad y Propaganda</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" class="campos tamCamp" id="montPubProp">
+                </div>
+                <div class="col campRec">
+                    <b>Renovación de Licencia de licores</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" class="campos tamCamp" id="montRenovLicLic">
+                </div>
+                <div class="col campRec">
+                    <b>Aseo Urbano</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" class="campos tamCamp" id="montAseo">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col campRec">
+                    <b>Uso Conforme</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" class="campos tamCamp" id="montUsoConf">
+                </div>
+                <div class="col campRec">
+                    <b>Catastro</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" class="campos tamCamp" id="montCatast">
+                </div>
+                <div class="col campRec">
+                    <b>Tasa Administrativa</b>
+                </div>
+                <div class="col campRec">
+                    <input type="text" class="campos tamCamp" id="montTasaAdmin">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Expediente Asoc.</b>
+                </div>
+                <div class="col">
+                    <input type="text" class="campos tamCamp" id="numExpAsoc">
+                </div>
+            </div>
+        </div>';
     }
 }
 

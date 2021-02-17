@@ -263,4 +263,7 @@ include('../comercio.php');
     if($accion=="verActEconForm"){
         $comercios->verActEconForm();
     }
+    if($accion=="mostCotz"){
+        $comercios->mostCotz();
+    }
 ?>
