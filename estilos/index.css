@@ -1,0 +1,77 @@
+html{
+    height: 30em;
+    background: linear-gradient(to bottom, rgb(44 148 255) 0%, rgb(72 152 253) 51%, rgb(84 176 255) 71%, rgba(254,254,254,1) 100%) !important;
+    background-repeat: no-repeat !important;
+}
+body{
+    background: transparent;
+    height: 550px;
+    max-height: 550px;
+}
+.campos{
+    height: 33px;
+}
+.escritorio{
+    position: relative;
+    left: 4em;
+    bottom: 13em;
+    background-color: #000000bf !important;
+    width: 85% !important;
+    height: 35em;
+    border: 4px solid #c1c1c1;
+    overflow-y: auto;
+}
+.botonTama{
+    width: 6em;
+    margin: 0.5em;
+    padding: 1% !important;
+    border: 1px solid black !important;
+}
+.botonleft,.botonRight{    
+    margin-top: 2em;
+}
+.logoFondo{
+    position: absolute;
+    top: 10%;
+    left: 25%;
+    opacity: 25%;
+    z-index: -1 !important;
+}
+.menuFloat{
+    position: relative;
+    top: 13em;
+    left: -0.5em;
+    width: 23%;
+}
+.menuFloat button{
+    width: 50%;
+    padding: 4% !important;
+}
+.menu{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    left: 29em;
+    top: 38%;
+}
+#general{
+    height:10em !important;
+}
+.firma{
+    position: absolute;
+    width: 18%;
+    bottom: 0px !important  ;
+    opacity: 38%;
+}
+.firma img{
+    width: 100%;
+}
+.opciones{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 35em;
+    justify-content: center;
+}

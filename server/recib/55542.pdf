@@ -1,0 +1,149 @@
+%PDF-1.3
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/Contents 4 0 R>>
+endobj
+4 0 obj
+<</Length 915>>
+stream
+2 J
+0.57 w
+BT /F1 9.00 Tf ET
+BT 212.60 924.23 Td (REPUBLICA BOLIVARIANA DE VENEZUELA) Tj ET
+BT 229.61 912.89 Td (INSTITUTO AUTONOMO MUNICIPAL ) Tj ET
+BT 232.44 901.55 Td (DE ORDENAMIENTO TERRITORIAL) Tj ET
+BT 204.09 890.21 Td (MUNICIPIO FERNANDEZ FEO - EDO. TACHIRA) Tj ET
+BT 272.13 878.87 Td (RIF: G200129891) Tj ET
+BT 399.69 791.00 Td (REPORTE POR USUARIOS) Tj ET
+34.02 779.53 45.35 -19.84 re S BT 51.96 766.91 Td (Nº) Tj ET
+79.37 779.53 59.53 -19.84 re S BT 87.63 766.91 Td (Expediente) Tj ET
+138.90 779.53 226.77 -19.84 re S BT 236.54 766.91 Td (Nombre) Tj ET
+365.67 779.53 85.04 -19.84 re S BT 394.44 766.91 Td (Cedula) Tj ET
+450.71 779.53 311.81 -19.84 re S BT 588.12 766.91 Td (Direccion) Tj ET
+BT 229.02 59.66 Td (PIÑAL, CALLE 3 ENTRE CARRERAS 3 Y) Tj ET
+BT 206.03 48.32 Td (4,PALACIO MUNICIPAL, MUNICIPIO FERNANDEZ) Tj ET
+BT 206.34 36.99 Td (FEO - ESTADO TACHIRA IAMOTFF@GMAIL.COM) Tj ET
+BT /F2 8.00 Tf ET
+
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R ]
+/Count 1
+/MediaBox [0 0 612.28 949.61]
+>>
+endobj
+5 0 obj
+<</Length 675>>
+stream
+/CIDInit /ProcSet findresource begin
+12 dict begin
+begincmap
+/CIDSystemInfo
+<</Registry (Adobe)
+/Ordering (UCS)
+/Supplement 0
+>> def
+/CMapName /Adobe-Identity-UCS def
+/CMapType 2 def
+1 begincodespacerange
+<00> <FF>
+endcodespacerange
+6 beginbfrange
+<00> <7F> <0000>
+<86> <87> <2020>
+<91> <92> <2018>
+<93> <94> <201C>
+<96> <97> <2013>
+<A0> <FF> <00A0>
+endbfrange
+19 beginbfchar
+<80> <20AC>
+<82> <201A>
+<83> <0192>
+<84> <201E>
+<85> <2026>
+<88> <02C6>
+<89> <2030>
+<8A> <0160>
+<8B> <2039>
+<8C> <0152>
+<8E> <017D>
+<95> <2022>
+<98> <02DC>
+<99> <2122>
+<9A> <0161>
+<9B> <203A>
+<9C> <0153>
+<9E> <017E>
+<9F> <0178>
+endbfchar
+endcmap
+CMapName currentdict /CMap defineresource pop
+end
+end
+endstream
+endobj
+6 0 obj
+<</Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/ToUnicode 5 0 R
+>>
+endobj
+7 0 obj
+<</Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/ToUnicode 5 0 R
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 6 0 R
+/F2 7 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+8 0 obj
+<<
+/Producer (FPDF 1.82)
+/CreationDate (D:20210217142325)
+>>
+endobj
+9 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+>>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000001051 00000 n 
+0000002097 00000 n 
+0000000009 00000 n 
+0000000087 00000 n 
+0000001138 00000 n 
+0000001862 00000 n 
+0000001976 00000 n 
+0000002211 00000 n 
+0000002287 00000 n 
+trailer
+<<
+/Size 10
+/Root 9 0 R
+/Info 8 0 R
+>>
+startxref
+2336
+%%EOF
