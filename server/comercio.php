@@ -354,6 +354,12 @@ class comercios{
                     <button onclick="btnMostCotz()" class="btn btn-primary">COTIZACION</button>
                 </div>
                 <div class="col">
+                    <button onclick="btnMostLiq()" class="btn btn-primary">LIQUIDACION</button>
+                </div>
+                <div class="col">
+                    <button onclick="btnLicAct()" class="btn btn-primary">Lic. Actividad Economica</button>
+                </div>
+                <div class="col">
                     <button onclick="btnImpriApertu()" class="btn btn-primary" >IMPRIMIR</button>
                 </div>
             </div>
@@ -774,14 +780,43 @@ class comercios{
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col campRec">
                     <b>Expediente Asoc.</b>
                 </div>
-                <div class="col">
+                <div class="col campRec">
                     <input type="text" class="campos tamCamp" id="numExpAsoc">
+                </div>
+                <div class="col campRec">
+                    <b>Planta Electrica</b>
+                </div>
+                <div class="col campRec">
+                    <select id="plantElect">
+                        <option value="0"></option>
+                        <option value="si">SI</option>
+                        <option value="no">NO</option>
+                    </select>
+                </div>
+                <div class="col-2 ">
+                    <input type="buttom" class="btn btn-primary" value="Guardar" onclick="btnGuarCotiz()">
                 </div>
             </div>
         </div>';
+    }
+    function formLic(){
+        echo '
+        <div class="container-fluid espacReduc2">
+            <div class="row">
+                <div class="col titSect">
+                    <h3>INGRESE EL NUMERO DE EXPEDIENTE</h3>
+                </div>
+                <div class="col campRec">
+                    <input type="text" id="camExpBus" class="campos tamCamp"/> 
+                    <button onclick="btnImprLic()">Buscar</button> 
+                </div>
+            </div>
+        </div>
+        
+        ';
     }
 }
 

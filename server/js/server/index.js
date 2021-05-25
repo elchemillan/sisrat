@@ -307,6 +307,24 @@ class estructura{
                  }
             }
     }
+    formLic(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('campEscrit');
+        var divsitiomaterial = document.getElementById('campEscrit');
+        divsitioform.innerHTML="<img src='./assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "server/recib/recComer.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=formLic`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                 }
+            }
+    }
 }
 
 function btnVerOpComer(){
@@ -469,4 +487,8 @@ function VerActEconAper(){
 function btnMostCotz(){
     let estruc = new estructura
     estruc.mostCotz();
+}
+function btnLicAct(){
+    let estruc = new estructura
+    estruc.formLic()
 }

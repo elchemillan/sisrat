@@ -266,4 +266,7 @@ include('../comercio.php');
     if($accion=="mostCotz"){
         $comercios->mostCotz();
     }
+    if($accion=="formLic"){
+        $comercios->formLic();
+    }
 ?>

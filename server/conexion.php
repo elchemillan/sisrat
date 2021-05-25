@@ -2,7 +2,7 @@
     class conexion{
 
         var $user = "root";
-        var $pass = "Jm010310";
+        var $pass = "";
         var $bd = "sisrat";
         var $serv= "localhost";
         var $prefijoBD="";
