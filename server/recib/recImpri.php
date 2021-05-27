@@ -165,6 +165,12 @@ include('../imprimir.php');
                 }else{
                     $licencia->camExpBus = "nada";
                 } 
+                if(isset($_POST['correExp'])){
+                    $licencia->correExp = $_POST['correExp'];
+                }else{
+                    $licencia->correExp = "nada";
+                } 
+                $licencia->link2 = $link;
                 $licencia->imprimirEcon();
             }else{
                 $licencia->errorImpri();

@@ -110,7 +110,7 @@ class imprimir{
 		ajax=objetoAjax();
 		ajax.open("POST", "./server/recib/recImpri.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`camExpBus=${this.camExpBus}&accion=imprLic`); 
+        ajax.send(`camExpBus=${this.camExpBus}&correExp=${this.correExp}&accion=imprLic`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -169,5 +169,6 @@ function btnGuarLiquid(){
 function btnImprLic(){
     let imprim = new imprimir
     imprim.camExpBus = document.getElementById("camExpBus").value
+    imprim.correExp = document.getElementById("correExp").value
     imprim.imprLicAct();
 }

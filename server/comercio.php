@@ -810,8 +810,15 @@ class comercios{
                     <h3>INGRESE EL NUMERO DE EXPEDIENTE</h3>
                 </div>
                 <div class="col campRec">
-                    <input type="text" id="camExpBus" class="campos tamCamp"/> 
-                    <button onclick="btnImprLic()">Buscar</button> 
+                    <input type="text" id="camExpBus" class="campos tamCamp"/>  
+                </div>
+                <div class="col campRec">
+                    <input type="text" id="correExp" class="canois tamCamp" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col campRec">
+                    <button class="btn btn-primary" onclick="btnImprLic()">Buscar</button> 
                 </div>
             </div>
         </div>
