@@ -56,13 +56,7 @@ class comercios{
                         <button class="btn btn-primary">LISTAR</button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary">PAGAR</button>
-                    </div>
-                    <div class="col">
                         <button class="btn btn-primary">MODIFICAR</button>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-primary">RENOVAR</button>
                     </div>
                     <div class="col">
                         <button onclick="btnRegCodigs()" class="btn btn-primary">CODIGOS</button>

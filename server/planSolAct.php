@@ -251,11 +251,16 @@ class planActivi{
                 $pdf->SetY(188);
                 $pdf->SetX(147);
                 $pdf->Cell(0,5,utf8_decode(''),1,0,'C');
-
-                        $pdf->Output('F','../../assets/imprimir/55542.pdf');
+                $carpeta ='../../assets/imprimir/PAC/'.date("Y").'';
+                if(!file_exists($carpeta)){
+                        mkdir($carpeta,0777,true);
+                        $pdfEcon->Output('F','../../assets/imprimir/PAC/'.date("Y").'/'.$this->noExpediente.'.pdf');
+                }else{
+                        $pdfEcon->Output('F','../../assets/imprimir/PAC/'.date("Y").'/'.$this->noExpediente.'.pdf');
+                }
                 echo'
-                <input type="text" id="rutaPdf" value="./assets/imprimir/55542.pdf" />
-                <input type="hidden" id="numExp" value="55542">';
+                <input type="text" id="rutaPdf" value="./assets/imprimir/PAC/'.date("Y").'/'.$this->noExpediente.'.pdf" />
+                <input type="hidden" id="numExp" value="'.$this->noExpediente'.pdf">';
                 }
 
 	
@@ -333,7 +338,7 @@ class cotzAct{
                 $pdf->SetMargins(20,0,22);
                 $pdf->AliasNbPages();
                 $pdf->AddPage();
-
+                $pdf->SetAlpha(1);
                 $pdf->SetY(60);
                 $pdf->SetX(55);
                 $pdf->Cell(0,7,utf8_decode('COTIZACIÓN DE PAGO'),1,0,'C');
@@ -577,10 +582,16 @@ class cotzAct{
                 $pdf->SetX(97);
                 $pdf->Cell(0,7,utf8_decode(''.round(($busCotizRes["tasaAdminMont"]+$montTotalSCast)/$busCotizRes["petro"],2).''),1,0,'C');
 
-                $pdf->Output('F','../../assets/imprimir/5545.pdf');
+                $carpeta ='../../assets/imprimir/COTZ/'.date("Y").'';
+                if(!file_exists($carpeta)){
+                        mkdir($carpeta,0777,true);
+                        $pdfEcon->Output('F','../../assets/imprimir/COTZ/'.date("Y").'/'.$this->numExpAsoc.'.pdf');
+                }else{
+                        $pdfEcon->Output('F','../../assets/imprimir/COTZ/'.date("Y").'/'.$this->numExpAsoc.'.pdf');
+                }
                 echo'
-                <input type="text" id="rutaPdf" value="./assets/imprimir/5545.pdf" />
-                <input type="hidden" id="numExp" value="5545">';
+                <input type="text" id="rutaPdf" value="./assets/imprimir/COTZ/'.date("Y").'/'.$this->numExpAsoc.'.pdf" />
+                <input type="hidden" id="numExp" value="'.$this->numExpAsoc'.pdf">';
         }
 }
 
@@ -966,10 +977,16 @@ class Liquidacion{
                 $pdf->SetX(167);
                 $pdf->Cell(0,12,utf8_decode(''),1,0,'C');
 
-                $pdf->Output('F','../../assets/imprimir/52548.pdf');
+                $carpeta ='../../assets/imprimir/LIQ/'.date("Y").'';
+                if(!file_exists($carpeta)){
+                        mkdir($carpeta,0777,true);
+                        $pdfEcon->Output('F','../../assets/imprimir/LIQ/'.date("Y").'/'.$this->expAsoc.'.pdf');
+                }else{
+                        $pdfEcon->Output('F','../../assets/imprimir/LIQ/'.date("Y").'/'.$this->expAsoc.'.pdf');
+                }
                 echo'
-                <input type="hidden" id="rutaPdf" value="./assets/imprimir/52548.pdf" />
-                <input type="hidden" id="numExp" value="52548">';
+                <input type="text" id="rutaPdf" value="./assets/imprimir/LIQ/'.date("Y").'/'.$this->expAsoc.'.pdf" />
+                <input type="hidden" id="numExp" value="'.$this->expAsoc'.pdf">';
         }
 }
 

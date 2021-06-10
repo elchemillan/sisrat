@@ -7,8 +7,10 @@ class estructura{
         <nav class="menuFloat">
             <div class="row">
                 <div class="col ">
-                    <button class="btn btn-primary botonTama">Inicio</button>
-                </div>
+                        <form>
+                            <button  class="btn btn-primary botonTama">Inicio</button>
+                        </form>
+                    </div>
             </div>
             <div class="row">
                 <div class="col">
@@ -31,13 +33,16 @@ class estructura{
     function body(){
         echo'
             <img class="logoFondo"  src="assets/logo_ajustado.png"></img>
-        <div class="container escritorio">
-            <div class="row">
-                <div class="col " id="campEscrit">
-
+            <div class="container escritorio opciones">
+                <div class="row">
+                    <div class="col titSect" id="campEscrit">
+                        <h3>BUSCAR</h3>
+                    </div>
+                    <div class="col campRec">
+                        <input type="text" class=""/>
+                    </div>
                 </div>
             </div>
-        </div>
         ';
 
     }
