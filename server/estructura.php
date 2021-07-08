@@ -33,13 +33,16 @@ class estructura{
     function body(){
         echo'
             <img class="logoFondo"  src="assets/logo_ajustado.png"></img>
-            <div class="container escritorio opciones">
+            <div id="campEscrit" class="container escritorio opciones">
                 <div class="row">
-                    <div class="col titSect" id="campEscrit">
+                    <div class="col-3 titSect textCenter" >
                         <h3>BUSCAR</h3>
                     </div>
                     <div class="col campRec">
-                        <input type="text" class=""/>
+                        <input type="text" id="numExp"/>
+                    </div>
+                    <div class="col-2 textCenter">
+                        <button class="btn btn-primary " onclick="btnBuscar()" />Buscar</buttom>
                     </div>
                 </div>
             </div>

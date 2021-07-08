@@ -75,3 +75,8 @@ body{
     height: 35em;
     justify-content: center;
 }
+.textCenter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

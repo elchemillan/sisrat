@@ -43,50 +43,92 @@ class licenciaEcons{
         
         $conex = $this->link2;
 
+        //VERIFICAR SI LA LICENCIA DE ACTVIDAD ECONOMICA EXISTE CON EL COMERCIO A VERIFICAR Y EL AÑO EN CURSO
+
         $busExp  = "SELECT * FROM comercio where noExpe=".$this->camExpBus."";
         $resBusExp = $conex->query($busExp);
         $busExpRes = $resBusExp->fetch_array();
 
-        $busPropSQL = "SELECT * FROM propietario where id=".$busExpRes["fk_propietario"]."";
-        $resProp = $conex->query($busPropSQL);
-        $propRes = $resProp->fetch_array();
+        $verLicExp = "SELECT * FROM licactecon where fk_comercio=".$busExpRes["id"]."";
+        echo $verLicExp;
+        $resVeriLic = $conex->query($verLicExp);
+        $veriLicRes = $resVeriLic->fetch_array();
 
-        $divced = explode("|",$propRes["cedula"]);
-        $cedLetra = $divced[0];
-        $cedNum = $divced[1];
-        $cedFul = "".$cedLetra."-".$cedNum."";
 
-        $busDatExp = "SELECT * FROM datcomer where id=".$busExpRes["fk_datComer"]."";
-        $resBusDat = $conex->query($busDatExp);
-        $busDatRes = $resBusDat->fetch_array();
 
-        $divRif = explode("|",$busDatRes["rif"]);
-        $rifNum = $divRif[1];
-        $rifLetra = $divRif[0];
-        $rifFul = "".$rifLetra."-".$rifNum."";
+        if($veriLicRes["fechaEmic"]<date("Y")){ // SI EN LA BD EXISTEN PERO CON AÑO MENOR AL ACTUAL
+            $busPropSQL = "SELECT * FROM propietario where id=".$busExpRes["fk_propietario"]."";
+            $resProp = $conex->query($busPropSQL);
+            $propRes = $resProp->fetch_array();
 
-        $busActExp = "SELECT * FROM actecon where id=".$busExpRes["fk_actEcon"]."";
-        $resActExp = $conex->query($busActExp);
-        $actExpRes = $resActExp->fetch_array();
+            $divced = explode("|",$propRes["cedula"]);
+            $cedLetra = $divced[0];
+            $cedNum = $divced[1];
+            $cedFul = "".$cedLetra."-".$cedNum."";
 
-        $guarLicEcon = "INSERT INTO licactecon(fk_comercio,fechaEminc,fechaVenci,codContribuyente,corr,fk_actEcon)value(".$busExpRes["id"].",'".date("Y-m-d")."','".date("Y")."-12-31',".$this->camExpBus.",".$this->correExp.",".$busExpRes["fk_actEcon"].")";
-        $conex->query($guarLicEcon);
-        $idLicEcon= $conex->insert_id;
+            $busDatExp = "SELECT * FROM datcomer where id=".$busExpRes["fk_datComer"]."";
+            $resBusDat = $conex->query($busDatExp);
+            $busDatRes = $resBusDat->fetch_array();
 
-        $upLicExp = "UPDATE comercio SET fk_licEcon=".$idLicEcon." where id=".$busExpRes["id"]."";
-        $conex->query($upLicExp);
+            $divRif = explode("|",$busDatRes["rif"]);
+            $rifNum = $divRif[1];
+            $rifLetra = $divRif[0];
+            $rifFul = "".$rifLetra."-".$rifNum."";
 
-        $actEconSQL = "SELECT * FROM actecon where actecon.id=".$busExpRes["fk_actEcon"]." ";
-        $resActEcon = $conex->query($actEconSQL);
-        $actEconRes = $resActEcon->fetch_array();
+            $busActExp = "SELECT * FROM actecon where id=".$busExpRes["fk_actEcon"]."";
+            $resActExp = $conex->query($busActExp);
+            $actExpRes = $resActExp->fetch_array();
 
-        $grupbusSQL = "SELECT * FROM grupo where id=".$actEconRes["fk_grupo"]."";
-        $resGrupBus = $conex->query($grupbusSQL);
-        $grupBusRes = $resGrupBus->fetch_array();
+            $guarLicEcon = "INSERT INTO licactecon(fk_comercio,fechaEminc,fechaVenci,codContribuyente,corr,fk_actEcon)value(".$busExpRes["id"].",'".date("Y-m-d")."','".date("Y")."-12-31',".$this->camExpBus.",".$this->correExp.",".$busExpRes["fk_actEcon"].")";
+            $conex->query($guarLicEcon);
+            $idLicEcon= $conex->insert_id;
 
-        $subGrupSQL = "SELECT * FROM subgrupo where id=".$actEconRes["fk_grupo"]."";
-        $resSubGrup = $conex->query($subGrupSQL);
-        $subGrupRes = $resSubGrup->fetch_array();
+            $upLicExp = "UPDATE comercio SET fk_licEcon=".$idLicEcon." where id=".$busExpRes["id"]."";
+            $conex->query($upLicExp);
+
+            $actEconSQL = "SELECT * FROM actecon where id=".$busExpRes["fk_actEcon"]." ";
+            $resActEcon = $conex->query($actEconSQL);
+            $actEconRes = $resActEcon->fetch_array();
+
+            $grupbusSQL = "SELECT * FROM grupo where id=".$actEconRes["fk_grupo"]."";
+            $resGrupBus = $conex->query($grupbusSQL);
+            $grupBusRes = $resGrupBus->fetch_array();
+
+            $subGrupSQL = "SELECT * FROM subgrupo where id=".$actEconRes["fk_grupo"]."";
+            $resSubGrup = $conex->query($subGrupSQL);
+            $subGrupRes = $resSubGrup->fetch_array();            
+        }else{
+            //SI LA LICENCIA EXISTE Y ES LA MISMA DEL AÑO EN CURSO 
+            $busPropSQL = "SELECT * FROM propietario where id=".$busExpRes["fk_propietario"]."";
+            $resProp = $conex->query($busPropSQL);
+            $propRes = $resProp->fetch_array();
+
+            $divced = explode("|",$propRes["cedula"]);
+            $cedLetra = $divced[0];
+            $cedNum = $divced[1];
+            $cedFul = "".$cedLetra."-".$cedNum."";
+
+            $busDatExp = "SELECT * FROM datcomer where id=".$busExpRes["fk_datComer"]."";
+            $resBusDat = $conex->query($busDatExp);
+            $busDatRes = $resBusDat->fetch_array();
+
+            $divRif = explode("|",$busDatRes["rif"]);
+            $rifNum = $divRif[1];
+            $rifLetra = $divRif[0];
+            $rifFul = "".$rifLetra."-".$rifNum."";
+
+            $actEconSQL = "SELECT * FROM actecon where id=".$busExpRes["fk_actEcon"]." ";
+            $resActEcon = $conex->query($actEconSQL);
+            $actEconRes = $resActEcon->fetch_array();
+
+            $grupbusSQL = "SELECT * FROM grupo where id=".$actEconRes["fk_grupo"]."";
+            $resGrupBus = $conex->query($grupbusSQL);
+            $grupBusRes = $resGrupBus->fetch_array();
+
+            $subGrupSQL = "SELECT * FROM subgrupo where id=".$actEconRes["fk_grupo"]."";
+            $resSubGrup = $conex->query($subGrupSQL);
+            $subGrupRes = $resSubGrup->fetch_array();
+        }
 
         $pdfEcon = new pdfGenerl('P','mm','A4');
         $pdfEcon->SetMargins(20,0,8);

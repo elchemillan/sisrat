@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./estilos/comercios.css">
     <script src="./server/js/server/usuario.js"></script>
     <script src="./server/js/server/imprimir.js"></script>
+    <script src="./server/js/server/buscar.js"></script>
     
 
 </head>

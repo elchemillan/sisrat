@@ -33,26 +33,23 @@ class PDF1 extends FPDF{
 class planActivi{
 	function contruc(){
 		$noExpediente ="";
+                $link2 = "";
 	}
 
 	function primDat(){
 
                 session_start();
 
-                include('../conexion.php');
-                $MySql = new conexion;
-                $link= $MySql->conectar();
-
                 $expSQL = "SELECT * FROM comercio where noExpe=".$this->noExpediente."";
-                $resExp = $link->query($expSQL);
+                $resExp = $link2->query($expSQL);
                 $expRes = $resExp->fetch_array();
 
                 $actSQL = "SELECT * FROM actEcon where id=".$expRes["fk_actEcon"]."";
-                $resAct = $link->query($actSQL);
+                $resAct = $link2->query($actSQL);
                 $actRes = $resAct->fetch_array();
 
                 $datComerSQL = "SELECT * FROM datcomer where id=".$expRes["fk_datComer"]."";
-                $resDatComer = $link->query($datComerSQL);
+                $resDatComer = $link2->query($datComerSQL);
                 $datComerRes = $resDatComer->fetch_array();
 
                 $divRif = explode("|",$datComerRes["rif"]);
@@ -60,11 +57,11 @@ class planActivi{
                 $rifNum = $divRif[1];
 
                 $secSQL = "SELECT * FROM sector where id=".$expRes["fk_sector"]."";
-                $resSec = $link->query($secSQL);
+                $resSec = $link2->query($secSQL);
                 $secRes = $resSec->fetch_array();
 
                 $propSQL = "SELECT * FROM propietario where id=".$expRes["fk_propietario"]."";
-                $resProp = $link->query($propSQL);
+                $resProp = $link2->query($propSQL);
                 $propRes = $resProp->fetch_array();
 
                 $cedDiv = explode("|",$propRes["cedula"]);
@@ -72,7 +69,7 @@ class planActivi{
                 $cedNum = $cedDiv[1];
 
                 $usuSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
-                $resUsu = $link->query($usuSQL);
+                $resUsu = $link2->query($usuSQL);
                 $usuRes = $resUsu->fetch_array();
 
                 $pdf = new PDF1('P','mm','letter');
@@ -259,8 +256,8 @@ class planActivi{
                         $pdfEcon->Output('F','../../assets/imprimir/PAC/'.date("Y").'/'.$this->noExpediente.'.pdf');
                 }
                 echo'
-                <input type="text" id="rutaPdf" value="./assets/imprimir/PAC/'.date("Y").'/'.$this->noExpediente.'.pdf" />
-                <input type="hidden" id="numExp" value="'.$this->noExpediente'.pdf">';
+                <input type="hidden" id="rutaPdf" value="./assets/imprimir/PAC/'.date("Y").'/'.$this->noExpediente.'.pdf" />
+                <input type="hidden" id="numExp" value="'.$this->noExpediente.'.pdf">';
                 }
 
 	
@@ -284,13 +281,10 @@ class cotzAct{
                 $numExpAsoc = "";
         }
         function impCotz(){
-                include('../conexion.php');
-                $MySql = new conexion;
-                $link= $MySql->conectar();
 
                 $cotSQL = "INSERT INTO cotizaciones(minTrib,aforo,petro,plantaElec,actEconMont,certBomMont,SolvMont,PublicPropMont,renovLicoMont,aseoMont,usoConMont,catastMont,tasaAdminMont,fechaCot)value(".$this->minTrib.",".$this->aforo.",".$this->petroBs.",'".$this->plantElect."',".$this->montActEcon.",".$this->montCertBom.",".$this->montSolv.",".$this->montPubProp.",".$this->montRenovLicLic.",".$this->montAseo.",".$this->montUsoConf.",".$this->montCatast.",".$this->montTasaAdmin.",'".date("Y-m-d")."')";
-                $resCot = $link->query($cotSQL);
-                $cotizID = $link->insert_id;
+                $resCot = $link2->query($cotSQL);
+                $cotizID = $link2->insert_id;
 
                 //ACTUALIZAR DATO DE COTIZACION EN TABLA COMERCIO
                 $comerSQL = "UPDATE comercio SET fk_cotizaciones=".$cotizID." where noExpe=".$this->numExpAsoc."";
@@ -298,32 +292,32 @@ class cotzAct{
 
                 //BUSQUEDA DE EXPEDIENTES
                 $comerBusSQL = "SELECT * FROM comercio where noExpe=".$this->numExpAsoc."";
-                $resComerBus = $link->query($comerBusSQL);
+                $resComerBus = $link2->query($comerBusSQL);
                 $comerBusRes = $resComerBus->fetch_array();
 
                 $propieSQL = "SELECT * FROM propietario where id=".$comerBusRes["fk_propietario"]."";
-                $resPropie = $link->query($propieSQL);
+                $resPropie = $link2->query($propieSQL);
                 $propieRes = $resPropie->fetch_array();
 
                 $datComerSQL = "SELECT * FROM datcomer where id=".$comerBusRes["fk_datComer"]."";
-                $resDatComer = $link->query($datComerSQL);
+                $resDatComer = $link2->query($datComerSQL);
                 $datComerRes = $resDatComer->fetch_array();
 
                 $busCotizSQL = "SELECT * FROM cotizaciones where id=".$cotizID."";
 
-                $resBusCotiz = $link->query($busCotizSQL);
+                $resBusCotiz = $link2->query($busCotizSQL);
                 $busCotizRes = $resBusCotiz->fetch_array();
 
                 $sectSQL = "SELECT * FROM actEcon where id=".$comerBusRes["fk_actEcon"]."";
-                $busSect = $link->query($sectSQL);
+                $busSect = $link2->query($sectSQL);
                 $sectBus = $busSect->fetch_array();
 
                 $busCatgoSQL = "SELECT * FROM grupo where id=".$sectBus["fk_grupo"]."";
-                $resBusCatgo = $link->query($busCatgoSQL);
+                $resBusCatgo = $link2->query($busCatgoSQL);
                 $busCatgoRes = $resBusCatgo->fetch_array();
 
                 $busRubSQL = "SELECT * FROM subgrupo where id=".$sectBus["fk_subGrup"]."";
-                $resBusRub = $link->query($busRubSQL);
+                $resBusRub = $link2->query($busRubSQL);
                 $busRubRes = $resBusRub->fetch_array();
 
                 $divRif = explode("|",$datComerRes["rif"]);
@@ -591,7 +585,7 @@ class cotzAct{
                 }
                 echo'
                 <input type="text" id="rutaPdf" value="./assets/imprimir/COTZ/'.date("Y").'/'.$this->numExpAsoc.'.pdf" />
-                <input type="hidden" id="numExp" value="'.$this->numExpAsoc'.pdf">';
+                <input type="hidden" id="numExp" value="'.$this->numExpAsoc.'.pdf">';
         }
 }
 
@@ -604,49 +598,80 @@ class Liquidacion{
                 $procentOrdenan = "";
                 $minTribAnu = "";
                 $expAsoc = "";
+                $link2= "";
+                $liquid = "";
         }
 
 
         function impriLiquid(){
 
-                include('../conexion.php');
-                $MySql = new conexion;
-                $link= $MySql->conectar();
+                if($this->liquid == 0){
 
-                $liquidSQL = "INSERT INTO liquidaciones(ingreBrutos,otroIngre,totalIngre,porcenOrden,minTrib)value(".$this->ingreBrut.",".$this->ingreOtro.",".$this->totalIngre.",".$this->procentOrdenan.",".$this->minTribAnu.") ";
-                $resLiquid = $link->query($liquidSQL);
-                $idLiquid = $link->insert_id;
+                        $liquidSQL = "INSERT INTO liquidaciones(ingreBrutos,otroIngre,totalIngre,porcenOrden,minTrib)value(".$this->ingreBrut.",".$this->ingreOtro.",".$this->totalIngre.",".$this->procentOrdenan.",".$this->minTribAnu.") ";
+                        $resLiquid = $this->link2->query($liquidSQL);
+                        $idLiquid = $this->link2->insert_id;
 
-                $comerSQL = "UPDATE comercio SET fk_liquid=".$idLiquid." where noExpe=".$this->expAsoc."";
-                $link->query($comerSQL);
+                        $comerSQL = "UPDATE comercio SET fk_liquid=".$idLiquid." where noExpe=".$this->expAsoc."";
+                        $this->link2->query($comerSQL);
 
-                $busComerSQL = "SELECT * FROM comercio where noExpe=".$this->expAsoc."";
-                $resBusComer = $link->query($busComerSQL);
-                $busComerRes = $resBusComer->fetch_array();
+                        $busComerSQL = "SELECT * FROM comercio where noExpe=".$this->expAsoc."";
+                        $resBusComer = $this->link2->query($busComerSQL);
+                        $busComerRes = $resBusComer->fetch_array();
 
-                $busSectSQL = "SELECT * FROM sector where id=".$busComerRes["fk_sector"]."";
-                $resBusSect = $link->query($busSectSQL);
-                $busSectRes = $resBusSect->fetch_array();
+                        $busSectSQL = "SELECT * FROM sector where id=".$busComerRes["fk_sector"]."";
+                        $resBusSect = $this->link2->query($busSectSQL);
+                        $busSectRes = $resBusSect->fetch_array();
 
-                $busActEcon = "SELECT * FROM actEcon where id=".$busComerRes["fk_actEcon"]."";
-                $resActEcon = $link->query($busActEcon);
-                $actEconRes = $resActEcon->fetch_array();
+                        $busActEcon = "SELECT * FROM actEcon where id=".$busComerRes["fk_actEcon"]."";
+                        $resActEcon = $this->link2->query($busActEcon);
+                        $actEconRes = $resActEcon->fetch_array();
 
-                $busDatComer = "SELECT * FROM datcomer where id=".$busComerRes["fk_datComer"]."";
-                $resDatComer = $link->query($busDatComer);
-                $datComerRes = $resDatComer->fetch_array();
+                        $busDatComer = "SELECT * FROM datcomer where id=".$busComerRes["fk_datComer"]."";
+                        $resDatComer = $this->link2->query($busDatComer);
+                        $datComerRes = $resDatComer->fetch_array();
 
-                $propSQL = "SELECT * FROM propietario where id=".$busComerRes["fk_propietario"]."";
-                $resProp = $link->query($propSQL);
-                $propRes = $resProp->fetch_array();
+                        $propSQL = "SELECT * FROM propietario where id=".$busComerRes["fk_propietario"]."";
+                        $resProp = $this->link2->query($propSQL);
+                        $propRes = $resProp->fetch_array();
 
-                $divRif = explode("|",$datComerRes["rif"]);
-                $rifLetra = $divRif[0];
-                $rifNum = $divRif[1];
+                        $divRif = explode("|",$datComerRes["rif"]);
+                        $rifLetra = $divRif[0];
+                        $rifNum = $divRif[1];
 
-                $liquiSQL = "SELECT * FROM liquidaciones where id=".$busComerRes["fk_liquid"]."";
-                $resLiqui = $link->query($liquiSQL);
-                $liquiRes = $resLiqui->fetch_array();
+                        $liquiSQL = "SELECT * FROM liquidaciones where id=".$busComerRes["fk_liquid"]."";
+                        $resLiqui = $this->link->query($liquiSQL);
+                        $liquiRes = $resLiqui->fetch_array();
+                }       
+
+                if($this->liquid != 0){
+                        $busComerSQL = "SELECT * FROM comercio where noExpe=".$this->expAsoc."";
+                        $resBusComer = $this->link2->query($busComerSQL);
+                        $busComerRes = $resBusComer->fetch_array();
+
+                        $busSectSQL = "SELECT * FROM sector where id=".$busComerRes["fk_sector"]."";
+                        $resBusSect = $this->link2->query($busSectSQL);
+                        $busSectRes = $resBusSect->fetch_array();
+
+                        $busActEcon = "SELECT * FROM actEcon where id=".$busComerRes["fk_actEcon"]."";
+                        $resActEcon = $this->link2->query($busActEcon);
+                        $actEconRes = $resActEcon->fetch_array();
+
+                        $busDatComer = "SELECT * FROM datcomer where id=".$busComerRes["fk_datComer"]."";
+                        $resDatComer = $this->link2->query($busDatComer);
+                        $datComerRes = $resDatComer->fetch_array();
+
+                        $propSQL = "SELECT * FROM propietario where id=".$busComerRes["fk_propietario"]."";
+                        $resProp = $this->link2->query($propSQL);
+                        $propRes = $resProp->fetch_array();
+
+                        $divRif = explode("|",$datComerRes["rif"]);
+                        $rifLetra = $divRif[0];
+                        $rifNum = $divRif[1];
+
+                        $liquiSQL = "SELECT * FROM liquidaciones where id=".$busComerRes["fk_liquid"]."";
+                        $resLiqui = $this->link2->query($liquiSQL);
+                        $liquiRes = $resLiqui->fetch_array();
+                }
 
                 $pdf = new PDF1('P','mm','A4');
                 $pdf->SetMargins(20,0,22);
@@ -727,7 +752,7 @@ class Liquidacion{
                 $pdf->Cell(50,7,utf8_decode(''.$rifNum.''),1,0,'C');
                 $pdf->SetY(107);
                 $pdf->SetX(77);
-                $pdf->Cell(15,7,utf8_decode('SI'.$busComerRes["cambDomi"].''),1,0,'C');
+                $pdf->Cell(15,7,utf8_decode('SI'.$datComerRes["cambDomi"].''),1,0,'C');
                 $pdf->SetY(107);
                 $pdf->SetX(92);
                 if($datComerRes["cambDomi"]=="Si"){
@@ -980,13 +1005,13 @@ class Liquidacion{
                 $carpeta ='../../assets/imprimir/LIQ/'.date("Y").'';
                 if(!file_exists($carpeta)){
                         mkdir($carpeta,0777,true);
-                        $pdfEcon->Output('F','../../assets/imprimir/LIQ/'.date("Y").'/'.$this->expAsoc.'.pdf');
+                        $pdf->Output('F','../../assets/imprimir/LIQ/'.date("Y").'/'.$this->expAsoc.'.pdf');
                 }else{
-                        $pdfEcon->Output('F','../../assets/imprimir/LIQ/'.date("Y").'/'.$this->expAsoc.'.pdf');
+                        $pdf->Output('F','../../assets/imprimir/LIQ/'.date("Y").'/'.$this->expAsoc.'.pdf');
                 }
                 echo'
-                <input type="text" id="rutaPdf" value="./assets/imprimir/LIQ/'.date("Y").'/'.$this->expAsoc.'.pdf" />
-                <input type="hidden" id="numExp" value="'.$this->expAsoc'.pdf">';
+                <input type="hidden" id="rutaPdf" value="./assets/imprimir/LIQ/'.date("Y").'/'.$this->expAsoc.'.pdf" />
+                <input type="hidden" id="numExp" value="'.$this->expAsoc.'.pdf">';
         }
 }
 

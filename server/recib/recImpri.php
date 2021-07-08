@@ -19,13 +19,13 @@ include('../imprimir.php');
     if($accion=="impriDat"){
     	include('../planSolAct.php');
     	$planActPDF = new planActivi;
-    	
-    	
+
     	if(isset($_POST['noExpediente'])){
     		$planActPDF->noExpediente = $_POST['noExpediente'];
 	    }else{
 	        $planActPDF->noExpediente = "nada";
 	    }
+
 
 	    $planActPDF->primDat();
     }
@@ -113,36 +113,103 @@ include('../imprimir.php');
         include('../planSolAct.php');
         $planActPDF = new Liquidacion;
 
-        if(isset($_POST['ingreBrut'])){
-            $planActPDF->ingreBrut = $_POST['ingreBrut'];
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
+        $verExp = "SELECT * FROM comercio where noExpe=".$_POST['noExpediente']."";
+        $resVerExp = $link->query($verExp);
+        $verExpRes = $resVerExp->fetch_array();
+
+        if($_POST["oper"]=="VERPLANILLA"){
+
+            $verLiquidSQL = "SELECT * FROM liquidaciones where id=".$verExpRes["fk_liquid"]."";
+            
+            $resLiquid = $link->query($verLiquidSQL);
+            $liquidRes = $resLiquid->fetch_array();
+
+            if(isset($liquidRes['ingreBrut'])){
+                $planActPDF->ingreBrut = $liquidRes['ingreBrut'];
+            }else{
+                $planActPDF->ingreBrut = "nada";
+            }
+            if(isset($liquidRes['ingreOtro'])){
+                $planActPDF->ingreOtro = $liquidRes['ingreOtro'];
+            }else{
+                $planActPDF->ingreOtro = "nada";
+            }
+            if(isset($liquidRes['totalIngre'])){
+                $planActPDF->totalIngre = $liquidRes['totalIngre'];
+            }else{
+                $planActPDF->totalIngre = "nada";
+            }
+            if(isset($liquidRes['procentOrdenan'])){
+                $planActPDF->procentOrdenan = $liquidRes['procentOrdenan'];
+            }else{
+                $planActPDF->procentOrdenan = "nada";
+            }
+            if(isset($liquidRes['minTribAnu'])){
+                $planActPDF->minTribAnu = $liquidRes['minTribAnu'];
+            }else{
+                $planActPDF->minTribAnu = "nada";
+            }
+            if(isset($_POST['noExpediente'])){
+                $planActPDF->expAsoc = $_POST['noExpediente'];
+            }else{
+                $planActPDF->expAsoc = "nada";
+            } 
+            if(isset($_POST['noExpediente'])){
+                $planActPDF->noExpediente = $_POST['noExpediente'];
+            }else{
+                $planActPDF->noExpediente = "nada";
+            }
+                $planActPDF->liquid = $verExpRes["fk_liquid"];
+                $planActPDF->link2= $link;
         }else{
-            $planActPDF->ingreBrut = "nada";
+            $planActPDF->liquid = 0;
+            $planActPDF->link2= $link;
+            if(isset($_POST['ingreBrut'])){
+                $planActPDF->ingreBrut = $_POST['ingreBrut'];
+            }else{
+                $planActPDF->ingreBrut = "nada";
+            }
+            if(isset($_POST['ingreOtro'])){
+                $planActPDF->ingreOtro = $_POST['ingreOtro'];
+            }else{
+                $planActPDF->ingreOtro = "nada";
+            }
+            if(isset($_POST['totalIngre'])){
+                $planActPDF->totalIngre = $_POST['totalIngre'];
+            }else{
+                $planActPDF->totalIngre = "nada";
+            }
+            if(isset($_POST['procentOrdenan'])){
+                $planActPDF->procentOrdenan = $_POST['procentOrdenan'];
+            }else{
+                $planActPDF->procentOrdenan = "nada";
+            }
+            if(isset($_POST['minTribAnu'])){
+                $planActPDF->minTribAnu = $_POST['minTribAnu'];
+            }else{
+                $planActPDF->minTribAnu = "nada";
+            }
+            if(isset($_POST['expAsoc'])){
+                $planActPDF->expAsoc = $_POST['expAsoc'];
+            }else{
+                $planActPDF->expAsoc = "nada";
+            } 
+            if(isset($_POST['noExpediente'])){
+                $planActPDF->expAsoc = $_POST['noExpediente'];
+            }else{
+                $planActPDF->expAsoc = "nada";
+            } 
+            if(isset($_POST['noExpediente'])){
+                $planActPDF->noExpediente = $_POST['noExpediente'];
+            }else{
+                $planActPDF->noExpediente = "nada";
+            }
         }
-        if(isset($_POST['ingreOtro'])){
-            $planActPDF->ingreOtro = $_POST['ingreOtro'];
-        }else{
-            $planActPDF->ingreOtro = "nada";
-        }
-        if(isset($_POST['totalIngre'])){
-            $planActPDF->totalIngre = $_POST['totalIngre'];
-        }else{
-            $planActPDF->totalIngre = "nada";
-        }
-        if(isset($_POST['procentOrdenan'])){
-            $planActPDF->procentOrdenan = $_POST['procentOrdenan'];
-        }else{
-            $planActPDF->procentOrdenan = "nada";
-        }
-        if(isset($_POST['minTribAnu'])){
-            $planActPDF->minTribAnu = $_POST['minTribAnu'];
-        }else{
-            $planActPDF->minTribAnu = "nada";
-        }
-        if(isset($_POST['expAsoc'])){
-            $planActPDF->expAsoc = $_POST['expAsoc'];
-        }else{
-            $planActPDF->expAsoc = "nada";
-        } 
+
+        
 
         $planActPDF->impriLiquid();
     }
@@ -151,36 +218,42 @@ include('../imprimir.php');
         include('../conexion.php');
         $MySql = new conexion;
         $link= $MySql->conectar();
+        $numExp = $_POST['camExpBus'];
 
-        
 
-        $veriExp = "SELECT * FROM comercio where noExpe=".$_POST['camExpBus']."";
+        $veriExp = "SELECT * FROM comercio where noExpe=".$numExp."";
         $resExp = $link->query($veriExp);
         $expRes = $resExp->fetch_array();
         $licencia = new licenciaEcons;
         if(isset($expRes)){
             if($expRes["fk_cotizaciones"]!=0){
                 if(isset($_POST['camExpBus'])){
-                    $licencia->camExpBus = $_POST['camExpBus'];
+                    $licencia->camExpBus = $expRes["noExpe"];
                 }else{
                     $licencia->camExpBus = "nada";
                 } 
-                if(isset($_POST['correExp'])){
-                    $licencia->correExp = $_POST['correExp'];
+                $veriCor ="SELECT * FROM licactecon where fk_comercio=".$expRes["id"]."";
+                $resVeriCor = $link->query($veriCor);
+                $veriCorRes = $resVeriCor->fetch_array();
+                if($veriCorRes["fechaEminc"] < date("Y")){
+                    if(isset($_POST['correExp'])){
+                        $licencia->correExp = $_POST['correExp'];
+                    }else{
+                        $licencia->correExp = "nada";
+                    } 
+                    $licencia->link2 = $link;
+                    $licencia->imprimirEcon();
                 }else{
-                    $licencia->correExp = "nada";
-                } 
-                $licencia->link2 = $link;
-                $licencia->imprimirEcon();
+                    $licencia->correExp = $veriCorRes["corr"];
+                    $licencia->link2 = $link;
+                    $licencia->imprimirEcon();
+                }
             }else{
                 $licencia->errorImpri();
             }
         }else{
              $licencia->errorImpri();
         }
-        
-
-       
         
     }
 ?>
