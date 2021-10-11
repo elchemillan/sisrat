@@ -122,6 +122,24 @@ class imprimir{
 			     }
 	       	}
     }
+    actDat(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('campEscrit');
+        var divsitiomaterial = document.getElementById('campEscrit');
+        divsitioform.innerHTML="<img src='./assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "server/recib/recImpri.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`nomRaz=${this.nomRaz}&noExpedien=${this.noExpedien}&sectorContrib=${this.sectorContrib}&dirContrib=${this.dirContrib}&grupNom=${this.grupNom}&CampsubGrup=${this.CampsubGrup}&actEconAper=${this.actEconAper}&rifComple=${this.rifComple}&camDocContrib=${this.camDocContrib}&identFiscContrib=${this.identFiscContrib}&capPagContrib=${this.capPagContrib}&capSusContrib=${this.capSusContrib}&TelefContrib=${this.TelefContrib}&tipEsta=${this.tipEsta}&nomRepCon=${this.nomRepCon}&apelRepCon=${this.apelRepCon}&ceduFulRepre=${this.ceduFulRepre}&estRegCon=${this.estRegCon}&cidRegCont=${this.cidRegCont}&dirRegCon=${this.dirRegCon}&telfRegCon=${this.telfRegCon}&tipPropInmue=${this.tipPropInmue}&copCedRequi=${this.copCedRequi}&copRifdRequi=${this.copRifdRequi}&copRegComerRequi=${this.copRegComerRequi}&copPropInmue=${this.copPropInmue}&copPerSant=${this.copPerSant}&CarpMar=${this.CarpMar}&carSolic=${this.carSolic}&permiBomb=${this.permiBomb}&numExp=${this.numExp}&copRegComerRequi=${this.copRegComerRequi}&accion=actDat`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                 }
+            }
+    }
 }
 
 function btnImpriApertu(){
@@ -171,4 +189,89 @@ function btnImprLic(){
     imprim.camExpBus = document.getElementById("camExpBus").value
     imprim.correExp = document.getElementById("correExp").value
     imprim.imprLicAct();
+}
+function btnActDat(){
+    let imprim = new imprimir
+    imprim.nomRaz = document.getElementById("nomRaz").value
+    imprim.sectorContrib = document.getElementById("sectorContrib").value
+    imprim.dirContrib = document.getElementById("dirContrib").value
+    imprim.grupNom = document.getElementById("grupNom").value
+    imprim.CampsubGrup = document.getElementById("CampsubGrup").value
+    imprim.actEconAper = document.getElementById("actEconAper").value
+    imprim.noExpedien = document.getElementById("noExpedien").value
+
+    //UNIR DATOS DE RIF
+    rifCodComer = document.getElementById("rifCodComer").value
+    rifComer = document.getElementById("rifComer").value
+    imprim.rifComple =`${rifCodComer}|${rifComer}`
+
+    imprim.identFiscContrib = document.getElementById("identFiscContrib").value
+    imprim.capPagContrib = document.getElementById("capPagContrib").value
+    imprim.capSusContrib = document.getElementById("capSusContrib").value
+    imprim.TelefContrib = document.getElementById("TelefContrib").value
+    imprim.camDocContrib = document.getElementById("camDocContrib").value
+    imprim.tipEsta = document.getElementById("tipEsta").value
+    imprim.nomRepCon = document.getElementById("nomRepCon").value
+    imprim.apelRepCon = document.getElementById("apelRepCon").value
+
+    //UNIR CEDULA
+    codCedRepre = document.getElementById("codCedRepre").value
+    numCedRep = document.getElementById("numCedRep").value
+    imprim.ceduFulRepre =`${codCedRepre}|${numCedRep}`
+
+    imprim.estRegCon = document.getElementById("estRegCon").value
+    imprim.cidRegCont = document.getElementById("cidRegCont").value
+    imprim.dirRegCon = document.getElementById("dirRegCon").value
+    imprim.telfRegCon = document.getElementById("telfRegCon").value
+    imprim.tipPropInmue = document.getElementById("tipPropInmue").value
+    copCedRequi = document.getElementById("copCedRequi").checked
+    copRifdRequi = document.getElementById("copRifdRequi").checked
+    copRegComerRequi = document.getElementById("copRegComerRequi").checked
+    copPropInmue = document.getElementById("copPropInmue").checked
+    copPerSant = document.getElementById("copPerSant").checked
+    CarpMar = document.getElementById("CarpMar").checked
+    carSolic = document.getElementById("carSolic").checked
+    permiBomb = document.getElementById("permiBomb").checked
+    if(copCedRequi==true){
+        imprim.copCedRequi=document.getElementById("copCedRequi").value
+    }else{
+        imprim.copCedRequi ="nada"
+    }
+    if(copRifdRequi==true){
+        imprim.copRifdRequi=document.getElementById("copRifdRequi").value
+    }else{
+        imprim.copRifdRequi="nada"
+    }
+    if(copPropInmue==true){
+        imprim.copPropInmue=document.getElementById("copPropInmue").value
+    }else{
+        imprim.copPropInmue = "nada"
+    }
+    if(copPerSant==true){
+        imprim.copPerSant=document.getElementById("copPerSant").value
+    }else{
+        imprim.copPerSant="nada"
+    }
+    if(CarpMar==true){
+        imprim.CarpMar=document.getElementById("CarpMar").value
+    }else{
+        imprim.CarpMar="nada"
+    }
+    if(carSolic==true){
+        imprim.carSolic=document.getElementById("carSolic").value
+    }else{
+        imprim.carSolic="nada"
+    }
+    if(copRegComerRequi==true){
+        imprim.copRegComerRequi=document.getElementById("copRegComerRequi").value
+    }else{
+        imprim.copRegComerRequi="nada"
+    }
+    if(permiBomb==true){
+        imprim.permiBomb=document.getElementById("permiBomb").value
+    }else{
+        imprim.permiBomb="nada"
+    }
+    imprim.numExp = document.getElementById("numExp").value
+    imprim.actDat()
 }

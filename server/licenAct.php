@@ -50,7 +50,6 @@ class licenciaEcons{
         $busExpRes = $resBusExp->fetch_array();
 
         $verLicExp = "SELECT * FROM licactecon where fk_comercio=".$busExpRes["id"]."";
-        echo $verLicExp;
         $resVeriLic = $conex->query($verLicExp);
         $veriLicRes = $resVeriLic->fetch_array();
 

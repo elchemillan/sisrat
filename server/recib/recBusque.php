@@ -21,4 +21,7 @@ include('../busquedas.php');
 		$busque->mostBus();
 	}
 
+	if($accion=="modifExp"){
+		$busque->mostModif();
+	}
 ?>

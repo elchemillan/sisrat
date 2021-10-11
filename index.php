@@ -11,7 +11,7 @@
     <script src="./server/js/server/usuario.js"></script>
     <script src="./server/js/server/imprimir.js"></script>
     <script src="./server/js/server/buscar.js"></script>
-    
+    <script src="./server/js/server/reportes.js"></script>
 
 </head>
 <body>

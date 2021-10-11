@@ -279,46 +279,83 @@ class cotzAct{
                 $montCatast = "";
                 $montTasaAdmin = "";
                 $numExpAsoc = "";
+                $link2 = "";
+                $cotzRest = "";
+                $estatus = "";
+                $cotizID = "";
         }
         function impCotz(){
 
-                $cotSQL = "INSERT INTO cotizaciones(minTrib,aforo,petro,plantaElec,actEconMont,certBomMont,SolvMont,PublicPropMont,renovLicoMont,aseoMont,usoConMont,catastMont,tasaAdminMont,fechaCot)value(".$this->minTrib.",".$this->aforo.",".$this->petroBs.",'".$this->plantElect."',".$this->montActEcon.",".$this->montCertBom.",".$this->montSolv.",".$this->montPubProp.",".$this->montRenovLicLic.",".$this->montAseo.",".$this->montUsoConf.",".$this->montCatast.",".$this->montTasaAdmin.",'".date("Y-m-d")."')";
-                $resCot = $link2->query($cotSQL);
-                $cotizID = $link2->insert_id;
+                if($this->estatus = "visualizar"){
+                        //BUSQUEDA DE EXPEDIENTES
+                        $comerBusSQL = "SELECT * FROM comercio where noExpe=".$this->numExpAsoc."";
+                        echo $comerBusSQL;
+                        $resComerBus = $this->link2->query($comerBusSQL);
+                        $comerBusRes = $resComerBus->fetch_array();
 
-                //ACTUALIZAR DATO DE COTIZACION EN TABLA COMERCIO
-                $comerSQL = "UPDATE comercio SET fk_cotizaciones=".$cotizID." where noExpe=".$this->numExpAsoc."";
-                $link->query($comerSQL);
+                        $propieSQL = "SELECT * FROM propietario where id=".$comerBusRes["fk_propietario"]."";
+                        $resPropie = $this->link2->query($propieSQL);
+                        $propieRes = $resPropie->fetch_array();
 
-                //BUSQUEDA DE EXPEDIENTES
-                $comerBusSQL = "SELECT * FROM comercio where noExpe=".$this->numExpAsoc."";
-                $resComerBus = $link2->query($comerBusSQL);
-                $comerBusRes = $resComerBus->fetch_array();
+                        $datComerSQL = "SELECT * FROM datcomer where id=".$comerBusRes["fk_datComer"]."";
+                        $resDatComer = $this->link2->query($datComerSQL);
+                        $datComerRes = $resDatComer->fetch_array();
 
-                $propieSQL = "SELECT * FROM propietario where id=".$comerBusRes["fk_propietario"]."";
-                $resPropie = $link2->query($propieSQL);
-                $propieRes = $resPropie->fetch_array();
+                        $busCotizSQL = "SELECT * FROM cotizaciones where id=".$this->cotizID."";
 
-                $datComerSQL = "SELECT * FROM datcomer where id=".$comerBusRes["fk_datComer"]."";
-                $resDatComer = $link2->query($datComerSQL);
-                $datComerRes = $resDatComer->fetch_array();
+                        $resBusCotiz = $this->link2->query($busCotizSQL);
+                        $busCotizRes = $resBusCotiz->fetch_array();
 
-                $busCotizSQL = "SELECT * FROM cotizaciones where id=".$cotizID."";
+                        $sectSQL = "SELECT * FROM actEcon where id=".$comerBusRes["fk_actEcon"]."";
+                        $busSect = $this->link2->query($sectSQL);
+                        $sectBus = $busSect->fetch_array();
 
-                $resBusCotiz = $link2->query($busCotizSQL);
-                $busCotizRes = $resBusCotiz->fetch_array();
+                        $busCatgoSQL = "SELECT * FROM grupo where id=".$sectBus["fk_grupo"]."";
+                        $resBusCatgo = $this->link2->query($busCatgoSQL);
+                        $busCatgoRes = $resBusCatgo->fetch_array();
 
-                $sectSQL = "SELECT * FROM actEcon where id=".$comerBusRes["fk_actEcon"]."";
-                $busSect = $link2->query($sectSQL);
-                $sectBus = $busSect->fetch_array();
+                        $busRubSQL = "SELECT * FROM subgrupo where id=".$sectBus["fk_subGrup"]."";
+                        $resBusRub = $this->link2->query($busRubSQL);
+                        $busRubRes = $resBusRub->fetch_array();
+                }else{
+                        $cotSQL = "INSERT INTO cotizaciones(minTrib,aforo,petro,plantaElec,actEconMont,certBomMont,SolvMont,PublicPropMont,renovLicoMont,aseoMont,usoConMont,catastMont,tasaAdminMont,fechaCot)value(".$this->minTrib.",".$this->aforo.",".$this->petroBs.",'".$this->plantElect."',".$this->montActEcon.",".$this->montCertBom.",".$this->montSolv.",".$this->montPubProp.",".$this->montRenovLicLic.",".$this->montAseo.",".$this->montUsoConf.",".$this->montCatast.",".$this->montTasaAdmin.",'".date("Y-m-d")."')";
+                        $resCot = $this->link2->query($cotSQL);
+                        $cotizID = $this->link2->insert_id;
 
-                $busCatgoSQL = "SELECT * FROM grupo where id=".$sectBus["fk_grupo"]."";
-                $resBusCatgo = $link2->query($busCatgoSQL);
-                $busCatgoRes = $resBusCatgo->fetch_array();
+                        //ACTUALIZAR DATO DE COTIZACION EN TABLA COMERCIO
+                        $comerSQL = "UPDATE comercio SET fk_cotizaciones=".$cotizID." where noExpe=".$this->numExpAsoc."";
+                        $link2->query($comerSQL);
 
-                $busRubSQL = "SELECT * FROM subgrupo where id=".$sectBus["fk_subGrup"]."";
-                $resBusRub = $link2->query($busRubSQL);
-                $busRubRes = $resBusRub->fetch_array();
+                        //BUSQUEDA DE EXPEDIENTES
+                        $comerBusSQL = "SELECT * FROM comercio where noExpe=".$this->numExpAsoc."";
+                        $resComerBus = $this->link2->query($comerBusSQL);
+                        $comerBusRes = $resComerBus->fetch_array();
+
+                        $propieSQL = "SELECT * FROM propietario where id=".$comerBusRes["fk_propietario"]."";
+                        $resPropie = $this->link2->query($propieSQL);
+                        $propieRes = $resPropie->fetch_array();
+
+                        $datComerSQL = "SELECT * FROM datcomer where id=".$comerBusRes["fk_datComer"]."";
+                        $resDatComer = $this->link2->query($datComerSQL);
+                        $datComerRes = $resDatComer->fetch_array();
+
+                        $busCotizSQL = "SELECT * FROM cotizaciones where id=".$cotizID."";
+
+                        $resBusCotiz = $this->link2->query($busCotizSQL);
+                        $busCotizRes = $resBusCotiz->fetch_array();
+
+                        $sectSQL = "SELECT * FROM actEcon where id=".$comerBusRes["fk_actEcon"]."";
+                        $busSect = $this->link2->query($sectSQL);
+                        $sectBus = $busSect->fetch_array();
+
+                        $busCatgoSQL = "SELECT * FROM grupo where id=".$sectBus["fk_grupo"]."";
+                        $resBusCatgo = $this->link2->query($busCatgoSQL);
+                        $busCatgoRes = $resBusCatgo->fetch_array();
+
+                        $busRubSQL = "SELECT * FROM subgrupo where id=".$sectBus["fk_subGrup"]."";
+                        $resBusRub = $this->link2->query($busRubSQL);
+                        $busRubRes = $resBusRub->fetch_array();
+                }
 
                 $divRif = explode("|",$datComerRes["rif"]);
                 $rifLetra = $divRif[0];
@@ -332,7 +369,6 @@ class cotzAct{
                 $pdf->SetMargins(20,0,22);
                 $pdf->AliasNbPages();
                 $pdf->AddPage();
-                $pdf->SetAlpha(1);
                 $pdf->SetY(60);
                 $pdf->SetX(55);
                 $pdf->Cell(0,7,utf8_decode('COTIZACIÓN DE PAGO'),1,0,'C');
@@ -579,12 +615,12 @@ class cotzAct{
                 $carpeta ='../../assets/imprimir/COTZ/'.date("Y").'';
                 if(!file_exists($carpeta)){
                         mkdir($carpeta,0777,true);
-                        $pdfEcon->Output('F','../../assets/imprimir/COTZ/'.date("Y").'/'.$this->numExpAsoc.'.pdf');
+                        $pdf->Output('F','../../assets/imprimir/COTZ/'.date("Y").'/'.$this->numExpAsoc.'.pdf');
                 }else{
-                        $pdfEcon->Output('F','../../assets/imprimir/COTZ/'.date("Y").'/'.$this->numExpAsoc.'.pdf');
+                        $pdf->Output('F','../../assets/imprimir/COTZ/'.date("Y").'/'.$this->numExpAsoc.'.pdf');
                 }
                 echo'
-                <input type="text" id="rutaPdf" value="./assets/imprimir/COTZ/'.date("Y").'/'.$this->numExpAsoc.'.pdf" />
+                <input type="hidden" id="rutaPdf" value="./assets/imprimir/COTZ/'.date("Y").'/'.$this->numExpAsoc.'.pdf" />
                 <input type="hidden" id="numExp" value="'.$this->numExpAsoc.'.pdf">';
         }
 }

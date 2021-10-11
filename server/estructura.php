@@ -24,7 +24,7 @@ class estructura{
             </div>
             <div class="row">
                 <div class="col ">
-                    <button class="btn btn-primary botonTama">Reportes</button>
+                    <button onclick="btnReporOp()" class="btn btn-primary botonTama">Reportes</button>
                 </div>
             </div>
         </nav>

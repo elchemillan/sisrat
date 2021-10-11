@@ -369,7 +369,7 @@ class comercios{
         $resSectBus = $link->query($busSectSQL);
 
         echo'
-        
+        <div class="espDatos">
             <div class="container-fluid espacReduc2">
                 <div class="row">
                     <div class="col-12 titSect">
@@ -621,6 +621,7 @@ class comercios{
             <div>
                 <input onclick="btnGuarApert()" type="buttom" class="btn btn-primary" value="Guardar"/>
             </div>
+        </div>
         </div>';
     }
     function mostActEcon(){
@@ -662,7 +663,7 @@ class comercios{
         $resSubGrup = $link->query($subGrupCod);
         $subGrupRes = $resSubGrup->fetch_array();
 
-        $comerSQL = "INSERT INTO comercio(nombre,fk_propietario,fk_sector,fk_datComer,tipo,fk_recaudos,fk_actEcon,noExpe)value('".$this->nomRaz."',".$fk_prop.",".$this->sectorContrib.",".$fk_darComer.",'".$this->tipPropInmue."',".$fk_recaudos.",".$this->actEconAper.",".$this->sectorContrib."".$codGrupRes["codigo"]."".$subGrupRes["codigo"]."".$this->noExpedien.")";
+        $comerSQL = "INSERT INTO comercio(nombre,fk_propietario,fk_sector,fk_datComer,tipo,fk_recaudos,fk_actEcon,noExpe,fecha)value('".$this->nomRaz."',".$fk_prop.",".$this->sectorContrib.",".$fk_darComer.",'".$this->tipPropInmue."',".$fk_recaudos.",".$this->actEconAper.",".$this->sectorContrib."".$codGrupRes["codigo"]."".$subGrupRes["codigo"]."".$this->noExpedien.",'".date("Y-m-d")."')";
         $link->query($comerSQL);
 
         echo'

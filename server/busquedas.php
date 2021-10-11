@@ -40,7 +40,7 @@ class busquedas{
 						<center><b>Opciones</b></center>
 							<div class="row">
 									<div class="col">
-										<button class="btn btn-primary" >Cotizacion</button>
+										<button class="btn btn-primary" onclick="btnCotzImpr()" >Cotizacion</button>
 									</div>
 									<div class="col">
 										<button class="btn btn-primary" onclick="btnImpLiq();">Liquidacion</button>
@@ -49,13 +49,35 @@ class busquedas{
 										<button class="btn btn-primary" onclick="btnImprPat();">Patente</button>
 									</div>
 									<div class="col">
-										<button class="btn btn-primary" onclick="btnModf()">Actualizar</button>
+										<button class="btn btn-primary" onclick="btnModf()">Modificar</button>
 									</div>
 							</div>
 					</div>
 				</div>
 			</div>
+			<div class="container" id="espacModif">
+
+			</div>
 		';
+	}
+	function mostModif(){
+		echo'
+			<div class="row">
+				<div class="col">
+					<buttom onclick="btnLiquid()"class="btn btn-primary">Liquidación</b>
+				</div>
+				<div class="col">
+					<buttom onclick="btnCotzMod()"class="btn btn-primary">Cotización</b>
+				</div>
+				<div class="col">
+					<buttom class="btn btn-primary" onclick="btnMostDat()">Datos</b>
+				</div>
+			</div>
+
+		';
+	}
+	function formModfLiquid(){
+		echo'hola';
 	}
 }
 
